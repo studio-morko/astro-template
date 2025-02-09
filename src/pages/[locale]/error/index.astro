@@ -1,14 +1,23 @@
 ---
-import { HTTPError }  from '@library/error/error';
 import Layout         from "@layouts/Layout.astro";
+import { HTTPError }  from '@library/error/error';
 import { Locale }     from '@library/locale/locale';
-
+import { Metadata }   from '@library/metadata/metadata';
 export const prerender = false;
 
 const locale      = Locale.current;
 const status      = HTTPError.status;
 const title       = HTTPError.title;
 const description = HTTPError.description;
+
+Metadata.set({
+  absolute: true,
+  template: '%s',
+  title: `${status} | ${title}`,
+  description: description,
+  index: false,
+  follow: false,
+});
 
 ---
 
