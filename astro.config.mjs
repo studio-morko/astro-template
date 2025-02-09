@@ -1,3 +1,4 @@
+import { Env }          from '@library/env/env';
 import { defineConfig } from 'astro/config';
 import node             from '@astrojs/node';
 import sitemap          from '@astrojs/sitemap';
@@ -76,7 +77,7 @@ export const postcss = {
 // Astro configuration
 export default defineConfig({
   output  : 'static',
-  site    : 'https://example.com',
+  site    : Env.get('PUBLIC_SITE_URL') ?? "",
   adapter : node({
     mode : 'standalone',
   }),
