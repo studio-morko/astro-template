@@ -1,4 +1,3 @@
-import { Env }          from '@library/env/env';
 import { defineConfig } from 'astro/config';
 import node             from '@astrojs/node';
 import sitemap          from '@astrojs/sitemap';
@@ -6,6 +5,16 @@ import autoprefixer     from 'autoprefixer';
 import postcssPresetEnv from 'postcss-preset-env';
 import postcssNesting   from 'postcss-nesting';
 import cssnano          from 'cssnano';
+
+// Environment variables
+const Env = {
+  NODE_ENV        : process.env.NODE_ENV        ?? 'local',
+  PUBLIC_SITE_URL : process.env.PUBLIC_SITE_URL ?? 'http://localhost:3000',
+};
+
+// Site configuration
+const site = Env.NODE_ENV === 'production'
+  ? Env.PUBLIC_SITE_URL : 'http://localhost:3000';
 
 // Custom application configuration
 export const app = {
@@ -74,10 +83,11 @@ export const postcss = {
   ]
 };
 
+
 // Astro configuration
 export default defineConfig({
+  site    : site,
   output  : 'static',
-  site    : Env.get('PUBLIC_SITE_URL') ?? "",
   adapter : node({
     mode : 'standalone',
   }),
