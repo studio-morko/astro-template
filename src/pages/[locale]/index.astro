@@ -1,0 +1,26 @@
+---
+import Layout     from '@layouts/Layout.astro';
+import { Locale } from '@library/locale/locale';
+import { Env }    from '@library/env/env';
+
+export async function getStaticPaths() {
+  return Locale.supported.map(locale => ({
+    params: { locale }
+  }));
+}
+
+const supported = Locale.supported;
+const current   = Locale.current;
+
+---
+
+<Layout>
+  <span>{Env.get('NODE_ENV')}</span>
+  <h1>{Locale.t('page.home.title')}: ({current})</h1>
+  <div style="display: flex; gap: 10px;">
+    {supported.map(locale => {
+      const info = Locale.info(locale);
+      return <a href={`/${locale}`}>{info.endonym}</a>
+    })}
+  </div>
+</Layout>

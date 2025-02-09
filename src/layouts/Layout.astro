@@ -1,11 +1,25 @@
-<!doctype html>
+---
+import { Metadata } from '@library/metadata/metadata';
+
+// Example of setting metadata
+Metadata.set({
+	title: 'Astro Template',
+	description: 'A robust Astro starter template with essential developer tooling: SEO optimization, dynamic i18n support, error handling, utility functions, and design tokens. Foundation for building production-ready websites.',
+	keywords: ['astro', 'template'],
+});
+
+---
+
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{Metadata.title}</title>
+		<meta name="description" content={Metadata.description} />
+		<meta name="keywords" content={Metadata.keywords?.join(', ') ?? ''} />
 	</head>
 	<body>
 		<slot />
