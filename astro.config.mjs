@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import node             from '@astrojs/node';
 
 // Custom application configuration
 export const app = {
@@ -32,4 +33,10 @@ export const app = {
 };
 
 // Astro configuration
-export default defineConfig({});
+export default defineConfig({
+  output  : 'static',
+  adapter : node({
+    mode : 'standalone',
+    port : 3000
+  })
+});
