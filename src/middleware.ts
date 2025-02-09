@@ -11,6 +11,6 @@ const middlewares = [
 ];
 
 /**
- * Middleware sequence:
+ * Middleware sequence : 
  */
 export const onRequest = sequence(...middlewares);

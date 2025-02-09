@@ -14,7 +14,6 @@ let   current      = config.fallback;
  */
 export const Locale = {
 
-
   /**
    * Get locale info by code
    * @param   {string} code     : Locale code to get info for
@@ -23,7 +22,6 @@ export const Locale = {
   info(code: string): LocaleStructure {
     return config.locales[code as keyof typeof config.locales];
   },
-
 
   /**
    * Load translations for a locale
@@ -44,7 +42,6 @@ export const Locale = {
     }
   },
 
-
   /**
    * Set locale cookie
    * @param   {string} code    : Locale code to set in cookie
@@ -59,7 +56,6 @@ export const Locale = {
     });
     }
   },
-
 
   /**
    * Set current locale
@@ -79,7 +75,6 @@ export const Locale = {
     }
   },
 
-
   /**
    * Get locale from cookie
    * @param   {any} cookies        : Astro cookies API instance
@@ -89,7 +84,6 @@ export const Locale = {
     return cookies?.get('locale')?.value;
   },
 
-
   /**
    * Get current locale
    * @returns {string} : The current locale
@@ -97,7 +91,6 @@ export const Locale = {
   get current(): string {
     return current;
   },
-
 
   /**
    * Get list of supported locales
@@ -107,7 +100,6 @@ export const Locale = {
     return Object.keys(config.locales);
   },
 
-
   /**
    * Get fallback locale
    * @returns {string} : The fallback locale
@@ -116,7 +108,6 @@ export const Locale = {
     return config.fallback;
   },
 
-
   /**
    * Is locale handling enabled
    * @returns {boolean} : Whether locale handling is enabled
@@ -124,7 +115,6 @@ export const Locale = {
   get enabled(): boolean {
     return config.enabled;
   },
-
   
   /**
    * Translate a key
@@ -135,7 +125,6 @@ export const Locale = {
     const localeTranslations = translations.get(current) || {};
     return localeTranslations[key] ?? key;
   },
-
 
   /**
    * Middleware for handling locale detection and setting
