@@ -1,0 +1,14 @@
+{
+  "editor.tabSize"            : 2,
+  "editor.insertSpaces"       : true,
+  "editor.detectIndentation"  : false,
+
+  // Better Align:
+  "alignment.operatorPadding" : "left",
+  "alignment.surroundSpace"   : {
+    "colon"      : [1, 1],
+    "assignment" : [1, 1],
+    "arrow"      : [1, 1],
+    "comment"    : 1
+  }
+}
