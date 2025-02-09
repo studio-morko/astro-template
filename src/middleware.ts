@@ -1,5 +1,6 @@
 import { defineMiddleware, sequence } from 'astro:middleware';
 import { Locale }                     from '@library/locale/locale';
+import { HTTPError }                  from '@library/error/error';
 
 /**
  * Middleware array
@@ -7,10 +8,17 @@ import { Locale }                     from '@library/locale/locale';
 const middlewares = [
 
   // 1. Use custom locale handler, if enabled
-  ...(Locale.enabled ? [defineMiddleware(Locale.middleware())] : []),
+  ...(Locale.enabled ? [
+    defineMiddleware(Locale.middleware())
+  ] : []),
+  
+  // 2. Error handling middleware, if enabled
+  ...(HTTPError.enabled ? [
+    defineMiddleware(HTTPError.middleware())
+  ] : []),
 ];
 
 /**
- * Middleware sequence : 
+ * Middleware sequence
  */
 export const onRequest = sequence(...middlewares);
