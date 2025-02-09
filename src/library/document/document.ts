@@ -6,6 +6,7 @@ import path     from 'path';
  * operations
  */
 export const Document = {
+  
   /**
    * Gives the unix timestamp of the last modification 
    * time of the document. This is useful for giving files
