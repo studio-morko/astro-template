@@ -1,0 +1,32 @@
+---
+import { HTTPError }  from '@library/error/error';
+import Layout         from "@layouts/Layout.astro";
+import { Locale }     from '@library/locale/locale';
+
+export const prerender = false;
+
+const locale      = Locale.current;
+const status      = HTTPError.status;
+const title       = HTTPError.title;
+const description = HTTPError.description;
+
+---
+
+<Layout>
+  <section class="error">
+    <div class="content">
+      <data class = "status" value = {status}>{status}</data>
+      <div class = "message">
+        <h1>{title}</h1>
+        <p>{description}</p>
+      </div>
+      <div class="action">
+        <a href={`/${locale}`}>Back to Home</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Your error page styles */
+</style>

@@ -173,3 +173,40 @@ export const Locale = {
     };
   }
 };
+
+/**
+ * Locale Handling Flow Explained:
+ * 1. User Request: https://mysite.com/blog
+ *    🌐 Browser Request -> 📟 Server
+ * 
+ * 2. Middleware Locale Check:
+ *    📟 Server
+ *    └─► 🔍 Check URL "/blog"
+ *        ❌ No locale prefix
+ *        └─► 🌍 Detect Locale:
+ *            1️⃣ Check Cookie
+ *            2️⃣ Check Browser Language
+ *            3️⃣ Use Fallback
+ *            └─► 🔄 Redirect: /en/blog
+ * 
+ * 3. Locale Path Case:
+ *    🌐 Request: "/en/blog"
+ *    └─► 🔍 Check URL
+ *        ✅ Has locale prefix "en"
+ *        └─► 📝 Set Active Locale
+ *            ├─► 🔄 Load Translations
+ *            └─► 🍪 Set Cookie
+ * 
+ * 4. Invalid Locale Case:
+ *    🌐 Request: "/xx/blog"
+ *    └─► 🔍 Check URL
+ *        ❌ Invalid locale "xx"
+ *        └─► 🔄 Redirect to fallback
+ *            └─► 🌍 /en/blog
+ * 
+ * 5. Translation Loading:
+ *    📝 Set Locale "fi"
+ *    └─► 📚 Load Translations
+ *        ├─► ✅ Success: Use Finnish
+ *        └─► ❌ Error: Use Empty {}
+ */
