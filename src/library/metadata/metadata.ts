@@ -1,17 +1,21 @@
+import      { Env }               from '@library/env/env';
 import type { MetadataStructure } from '@library/metadata/metadata.types';
 import type { MiddlewareHandler } from 'astro';
+
+// The template for the metadata
+const template = Env.has("PUBLIC_NAME") 
+  ? `%s | ${Env.get("PUBLIC_NAME")}` : '%s'; 
 
 // Initial/default metadata values
 const defaultMetadata: MetadataStructure = {
   index       : false,             // Whether the page should be indexed by search engines
   follow      : false,             // Whether the page should be followed by search engines
   absolute    : false,             // Whether the metadata is absolute
-  template    : "%s",              // The template for the metadata
+  template    : template,          // The template for the metadata
   title       : "Missing title!",  // The title of the page
   description : undefined,         // The description of the page
   keywords    : undefined,         // The keywords of the page
   image       : undefined,         // The image of the page
-  url         : undefined,         // The URL of the page
   type        : undefined,         // The type of the page
 };
 
@@ -54,10 +58,13 @@ export const Metadata = {
   },
 
   /**
-   * Get the title value
-   * @returns {string} : The title value
+   * Get the formatted title value using the template
+   * @returns {string} : The formatted title value
    */
   get title(): string {
+    if (metadata.title && metadata.template.includes('%s')) {
+      return metadata.template.replace('%s', metadata.title);
+    }
     return metadata.title;
   },
 
@@ -86,14 +93,6 @@ export const Metadata = {
   },
 
   /**
-   * Get the URL value
-   * @returns {string | undefined} : The URL value
-   */
-  get url(): string | undefined {
-    return metadata.url;
-  },
-
-  /**
    * Get the type value
    * @returns {string | undefined} : The type value
    */
@@ -108,9 +107,9 @@ export const Metadata = {
    */
   get(key?: keyof MetadataStructure): MetadataStructure | MetadataStructure[keyof MetadataStructure] {
     if (key) {
-      return metadata[key] || undefined;
+      return metadata[key];
     }
-    return metadata;
+    return { ...metadata };  // Return a copy of the full metadata object
   },
 
   /**

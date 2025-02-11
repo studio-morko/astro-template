@@ -1,7 +1,8 @@
 ---
-import Layout     from '@layouts/Layout.astro';
-import { Locale } from '@library/locale/locale';
-import { Env }    from '@library/env/env';
+import Layout       from '@layouts/Layout.astro';
+import { Locale }   from '@library/locale/locale';
+import { Metadata } from '@library/metadata/metadata';
+import { Env }      from '@library/env/env';
 
 export async function getStaticPaths() {
   return Locale.supported.map(locale => ({
@@ -11,6 +12,14 @@ export async function getStaticPaths() {
 
 const supported = Locale.supported;
 const current   = Locale.current;
+
+
+// Example of setting metadata
+Metadata.set({
+	title: 'Homepage',
+	description: 'A robust Astro starter template with essential developer tooling: SEO optimization, dynamic i18n support, error handling, utility functions, and design tokens. Foundation for building production-ready websites.',
+	keywords: ['astro', 'template'],
+});
 
 ---
 

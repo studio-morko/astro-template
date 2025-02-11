@@ -1,5 +1,6 @@
 import { stat } from 'fs/promises';
 import path     from 'path';
+import { statSync } from 'fs';
 
 /**
  * Document namespace handles public file-related 
@@ -8,24 +9,24 @@ import path     from 'path';
 export const Document = {
   
   /**
-   * Gives the unix timestamp of the last modification 
-   * time of the document. This is useful for giving files
-   * a cache-busting query parameter.
+   * Gets file's last modification time as unix timestamp
    * 
-   * @param filePath : The path to the file
-   * @returns        : The unix timestamp of the last modification time
+   * @param webPath : Web path to the file (e.g. /assets/image.png)
+   * @returns       : Unix timestamp or 0 if error
    */
-  async modified(filePath: string): Promise<number> {
-    if (!filePath) {
-      console.warn('No file path provided to created method');
+  modified(webPath: string): number {
+    if (!webPath) {
+      console.warn('No path provided to modified method');
       return 0;
     }
     try {
-      const path  = this.path(filePath);
-      const stats = await stat(path);
+      // Remove leading slash for proper path resolution
+      const cleanPath = webPath.startsWith('/') ? webPath.slice(1) : webPath;
+      const fullPath  = this.path(cleanPath);
+      const stats     = statSync(fullPath);                                   // Use sync version
       return Math.floor(stats.mtimeMs / 1000);
     } catch (error) {
-      console.error(`Error getting creation time for ${filePath}:`, error);
+      console.error(`Error getting modification time for ${webPath}:`, error);
       return 0;
     }
   },
