@@ -1,0 +1,25 @@
+---
+
+interface Props {
+  title?       : string;
+  description? : string;
+  image?       : string;
+  url?         : string;
+  type?        : string;
+}
+
+const { 
+  title, 
+  description, 
+  image, 
+  url, 
+  type = 'website' 
+} = Astro.props;
+
+---
+
+{ title       && <meta property = "og:title"       content={title}       /> }
+{ description && <meta property = "og:description" content={description} /> }
+{ image       && <meta property = "og:image"       content={image}       /> }
+{ url         && <meta property = "og:url"         content={url}         /> }
+{ type        && <meta property = "og:type"        content={type}        /> }
