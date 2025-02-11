@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/studio-morko/astro-template/main/public/assets/images/banner.png" alt="Astro Template banner image" />
+<img src="https://github.com/studio-morko/astro-template/blob/main/public/images/banner.png" alt="Astro Template banner image" />
 
 # Astro Template
 
