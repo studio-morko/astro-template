@@ -10,6 +10,8 @@ export type MetadataStructure = {
   description? : string;   // Description of the page
   keywords?    : string[]; // Keywords of the page
   image?       : string;   // Image of the page
-  url?         : string;   // URL of the page
-  type?        : string;   // Type of the page
+  type?        : Type;     // Type of the page
 };
+
+export type Type = "website" | "article" | "profile" | 
+                   "video"   | "music"   | "image";
