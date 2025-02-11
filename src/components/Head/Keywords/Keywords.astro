@@ -1,0 +1,11 @@
+---
+
+interface Props {
+  value?: string[];
+}
+
+const { value } = Astro.props;
+
+---
+
+{ value && <meta name="keywords" content={value.join(', ')} /> } 
