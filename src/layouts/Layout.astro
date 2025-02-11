@@ -1,5 +1,7 @@
 ---
 import { Metadata } from '@library/metadata/metadata';
+import { Locale }   from '@library/locale/locale';
+import Head         from '@components/Head/Head.astro';
 
 // Example of setting metadata
 Metadata.set({
@@ -11,26 +13,9 @@ Metadata.set({
 ---
 
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{Metadata.title}</title>
-		<meta name="description" content={Metadata.description} />
-		<meta name="keywords" content={Metadata.keywords?.join(', ') ?? ''} />
-	</head>
+<html lang={Locale.current}>
+  <Head />
 	<body>
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
