@@ -1,7 +1,7 @@
-import { Locale }            from '@library/locale/locale';
-import { HTTPStatus }        from '@library/error/error.types';
+import { Locale }            from '@lib/locale/locale';
+import { HTTPStatus }        from '@lib/error/error.types';
 import { app }               from '@root/astro.config.mjs';
-import type { ErrorConfig }       from '@library/error/error.types';
+import type { ErrorConfig }       from '@lib/error/error.types';
 import type { MiddlewareHandler } from 'astro';
 
 // Private state

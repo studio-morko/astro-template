@@ -1,8 +1,9 @@
 ---
 import Layout       from '@layouts/Layout.astro';
-import { Locale }   from '@library/locale/locale';
-import { Metadata } from '@library/metadata/metadata';
-import { Env }      from '@library/env/env';
+import { Locale }   from '@lib/locale/locale';
+import { Metadata } from '@lib/metadata/metadata';
+import { Env }      from '@lib/env/env';
+import Link         from '@components/ui/Link/Link.astro';
 
 export async function getStaticPaths() {
   return Locale.supported.map(locale => ({
@@ -13,7 +14,6 @@ export async function getStaticPaths() {
 const supported = Locale.supported;
 const current   = Locale.current;
 
-
 // Example of setting metadata
 Metadata.set({
 	title: 'Homepage',
@@ -21,6 +21,8 @@ Metadata.set({
 	keywords: ['astro', 'template'],
 });
 
+console.log(supported);
+console.log(Locale.info('en'));
 ---
 
 <Layout>
@@ -29,7 +31,7 @@ Metadata.set({
   <div style="display: flex; gap: 10px;">
     {supported.map(locale => {
       const info = Locale.info(locale);
-      return <a href={`/${locale}`}>{info.endonym}</a>
+      return <Link url={`/${locale}`} external={false}>{info.endonym}</Link>
     })}
   </div>
 </Layout>

@@ -18,7 +18,7 @@
       "@styles/*"     : ["src/styles/*" ],
       "@assets/*"     : ["src/assets/*" ],
       "@images/*"     : ["src/assets/images/*" ],
-      "@library/*"    : ["src/library/*" ],
+      "@lib/*"        : ["src/lib/*" ],
       "@utility/*"    : ["src/utility/*" ],
       "@services/*"   : ["src/utility/services/*" ],
     },

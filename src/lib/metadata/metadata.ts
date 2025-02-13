@@ -1,5 +1,5 @@
-import      { Env }               from '@library/env/env';
-import type { MetadataStructure } from '@library/metadata/metadata.types';
+import      { Env }               from '@lib/env/env';
+import type { MetadataStructure } from '@lib/metadata/metadata.types';
 import type { MiddlewareHandler } from 'astro';
 
 // The template for the metadata

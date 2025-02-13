@@ -1,7 +1,7 @@
 import { defineMiddleware, sequence } from 'astro:middleware';
-import { Locale }                     from '@library/locale/locale';
-import { HTTPError }                  from '@library/error/error';
-import { Metadata }                   from '@library/metadata/metadata';
+import { Locale }                     from '@lib/locale/locale';
+import { HTTPError }                  from '@lib/error/error';
+import { Metadata }                   from '@lib/metadata/metadata';
 
 /**
  * Middleware array

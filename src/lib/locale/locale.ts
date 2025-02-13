@@ -1,8 +1,8 @@
 import { app }        from '@root/astro.config.mjs';
-import { HTTPError }  from '@library/error/error';
-import { HTTPStatus } from '@library/error/error.types';
+import { HTTPError }  from '@lib/error/error';
+import { HTTPStatus } from '@lib/error/error.types';
 import type { MiddlewareHandler }                     from 'astro';
-import type { TranslationStructure, LocaleStructure } from '@library/locale/locale.types';
+import type { TranslationStructure, LocaleStructure } from '@lib/locale/locale.types';
 
 // Private state
 const translations = new Map<string, TranslationStructure>();

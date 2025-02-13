@@ -1,4 +1,4 @@
-import type { EnvVariable } from '@library/env/env.types';
+import type { EnvVariable } from '@lib/env/env.types';
 
 /**
  * Environment variable handling namespace
