@@ -1,0 +1,129 @@
+/* Jet Brains Mono (Variable + Italic) */
+@font-face {
+  font-family  : "JetBrainsMono-Variable";
+  font-style   : normal;
+  font-weight  : 100 800;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/variable/JetBrainsMono.woff2") format('woff2');
+}
+@font-face {
+  font-family  : "JetBrainsMono-Variable";
+  font-style   : italic;
+  font-weight  : 100 800;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/variable/JetBrainsMono-Italic.woff2") format('woff2');
+}
+
+/* Jet Brains Mono (Normal + Italic) */
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : normal;
+  font-weight  : 100;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-100.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : italic;
+  font-weight  : 100;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-100-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : normal;
+  font-weight  : 200;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-200.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : italic;
+  font-weight  : 200;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-200-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : normal;
+  font-weight  : 300;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-300.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : italic;
+  font-weight  : 300;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-300-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : normal;
+  font-weight  : 400;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-400.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : italic;
+  font-weight  : 400;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-400-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : normal;
+  font-weight  : 500;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-500.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : italic;
+  font-weight  : 500;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-500-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : normal;
+  font-weight  : 600;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-600.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : italic;
+  font-weight  : 600;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-600-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : normal;
+  font-weight  : 700;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-700.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : italic;
+  font-weight  : 700;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-700-Italic.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : normal;
+  font-weight  : 800;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-800.woff2") format("woff2");
+}
+@font-face {
+  font-family  : "JetBrainsMono";
+  font-style   : italic;
+  font-weight  : 800;
+  font-display : swap;
+  src          : url("/fonts/JetBrainsMono/normal/JetBrainsMono-800-Italic.woff2") format("woff2");
+}
