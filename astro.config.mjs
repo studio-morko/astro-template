@@ -2,7 +2,6 @@ import { defineConfig } from 'astro/config';
 import node             from '@astrojs/node';
 import sitemap          from '@astrojs/sitemap';
 import autoprefixer     from 'autoprefixer';
-import postcssPresetEnv from 'postcss-preset-env';
 import postcssNesting   from 'postcss-nesting';
 import cssnano          from 'cssnano';
 
@@ -20,20 +19,13 @@ const site = Env.NODE_ENV === 'production'
 export const app = {
   errors: {
     enabled   : true,
-    supported : [
-      400, // Bad Request
-      401, // Unauthorized
-      403, // Forbidden
-      404, // Not Found
-      408, // Request Timeout
-      418, // I'm a Teapot
-      429, // Too Many Requests
-      500, // Internal Server Error
-      503  // Service Unavailable
-    ],
+    supported : [ 
+      400, 401, 403, 
+      404, 408, 418, 
+      429, 500, 503 ],
     fallback: {
-      clientError : 404,  // Not Found
-      serverError : 500   // Internal Server Error
+      clientError : 404,
+      serverError : 500
     }
   },
 
@@ -64,14 +56,6 @@ export const postcss = {
   plugins: [
     autoprefixer(),
     postcssNesting(),
-    postcssPresetEnv({
-      features: {
-        'custom-properties'    : true,
-        'custom-media-queries' : true,
-      },
-      preserve : true,
-      stage    : 0
-    }),
     cssnano({
       preset: ['default', {
         discardComments: {
@@ -79,7 +63,7 @@ export const postcss = {
         },
         colormin : false
       }]
-    })
+    }),
   ]
 };
 
