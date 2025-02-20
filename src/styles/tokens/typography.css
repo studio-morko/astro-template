@@ -1,0 +1,57 @@
+:root {
+  /* Font Family */
+  --font-family-sans : 'Inter',          -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto,            'Helvetica Neue', sans-serif;
+  --font-family-mono : 'JetBrains Mono', ui-monospace,  SFMono-Regular,     'SF Mono',       Consolas,   'Liberation Mono', Menlo,            monospace;
+
+  /* Base Font Size: 62.5% of 16px = 10px */
+  --font-size : 62.5%;
+
+  /* Font Size: (n * 100) / 10 = rem value */
+  /* Where n is the pixel value divided by 4 */
+  --font-size-100  : 0.4rem; /*  4px  */
+  --font-size-150  : 0.6rem; /*  6px  */
+  --font-size-200  : 0.8rem; /*  8px  */
+  --font-size-250  : 1.0rem; /* 10px  */
+  --font-size-300  : 1.2rem; /* 12px  */
+  --font-size-350  : 1.4rem; /* 14px  */
+  --font-size-400  : 1.6rem; /* 16px  */
+  --font-size-450  : 1.8rem; /* 18px  */
+  --font-size-500  : 2.0rem; /* 20px  */
+  --font-size-550  : 2.2rem; /* 22px  */
+  --font-size-600  : 2.4rem; /* 24px  */
+  --font-size-650  : 2.6rem; /* 26px  */
+  --font-size-700  : 2.8rem; /* 28px  */
+  --font-size-750  : 3.0rem; /* 30px  */
+  --font-size-800  : 3.2rem; /* 32px  */
+  --font-size-850  : 3.4rem; /* 34px  */
+  --font-size-900  : 3.6rem; /* 36px  */
+  --font-size-950  : 3.8rem; /* 38px  */
+  --font-size-1000 : 4.0rem; /* 40px  */
+
+  /* Font Weight */
+  --font-weight-100 : 100; /* Thin */
+  --font-weight-200 : 200; /* Extra Light */
+  --font-weight-300 : 300; /* Light */
+  --font-weight-400 : 400; /* Normal */
+  --font-weight-500 : 500; /* Medium */
+  --font-weight-600 : 600; /* Semi Bold */
+  --font-weight-700 : 700; /* Bold */
+  --font-weight-800 : 800; /* Extra Bold */
+  --font-weight-900 : 900; /* Black */
+
+  /* Letter Spacing:  */
+  --letter-spacing-densest : -0.05em;
+  --letter-spacing-denser  : -0.03em;
+  --letter-spacing-dense   : -0.02em;
+  --letter-spacing-normal  : 0;
+  --letter-spacing-wide    : 0.02em;
+  --letter-spacing-wider   : 0.03em;
+  --letter-spacing-widest  : 0.05em;
+
+  /* Line Height: (n * 100) / 10 = rem value */
+  /* Where n is the multiplier * 4 */
+  --line-height-compact : 1;
+  --line-height-tight   : 1.25;
+  --line-height-normal  : 1.5;
+  --line-height-relaxed : 1.75;
+}

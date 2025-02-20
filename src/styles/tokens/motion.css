@@ -1,0 +1,18 @@
+:root {
+  --duration-100       : 0.1s;
+  --duration-200       : 0.2s;
+  --duration-300       : 0.3s;
+  --duration-400       : 0.4s;
+  --duration-500       : 0.5s;
+  --duration-600       : 0.6s;
+  --duration-700       : 0.7s;
+  --duration-800       : 0.8s;
+  --duration-900       : 0.9s;
+  --duration-1000      : 1.0s;
+  
+  --motion-linear      : cubic-bezier(0, 0, 1, 1);
+  --motion-ease        : cubic-bezier(0.25, 0.1, 0.25, 1);
+  --motion-ease-in     : cubic-bezier(0.42, 0, 1, 1);
+  --motion-ease-out    : cubic-bezier(0.19, 0.91, 0.38, 1);
+  --motion-ease-in-out : cubic-bezier(0.42, 0, 0.58, 1);
+}
