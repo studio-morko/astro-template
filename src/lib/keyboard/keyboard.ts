@@ -4,54 +4,28 @@ import { Key } from '@lib/keyboard/keyboard.types';
  * Keyboard handling namespace
  */
 export const Keyboard = {
-  _pressed     : new Set<string>(),
-  _debug       : false,
-  _initialized : false,
-
-  /**
-   * Enable/disable debug mode
-   */
-  set debug(value: boolean) {
-    this._debug = value;
-  },
-
-  /**
-   * Get debug mode status
-   */
-  get debug(): boolean {
-    return this._debug;
-  },
+  pressed: new Set<string>(),
+  initialized: false,
 
   /**
    * Initialize keyboard event listeners
    */
-  _init(): void {
-    if (this._initialized) return;
+  init(): void {
+    if (this.initialized) return;
     
     window.addEventListener('keydown', (e: KeyboardEvent) => {
-      this._pressed.add(e.key);
-      if (this._debug) {
-        console.log('Key Down:', e.key);
-        console.log('Currently Pressed:', [...this._pressed]);
-      }
+      this.pressed.add(e.key);
     });
 
     window.addEventListener('keyup', (e: KeyboardEvent) => {
-      this._pressed.delete(e.key);
-      if (this._debug) {
-        console.log('Key Up:', e.key);
-        console.log('Currently Pressed:', [...this._pressed]);
-      }
+      this.pressed.delete(e.key);
     });
 
     window.addEventListener('blur', () => {
-      if (this._debug && this._pressed.size > 0) {
-        console.log('Window Blur - Clearing Keys:', [...this._pressed]);
-      }
-      this._pressed.clear();
+      this.pressed.clear();
     });
 
-    this._initialized = true;
+    this.initialized = true;
   },
 
   /**
@@ -60,8 +34,8 @@ export const Keyboard = {
    * @returns {boolean} : Whether the key is pressed
    */
   on(key: Key): boolean {
-    this._init();
-    return this._pressed.has(key);
+    this.init();
+    return this.pressed.has(key);
   },
 
   /**
@@ -70,7 +44,7 @@ export const Keyboard = {
    * @returns {boolean}    : Whether all keys are pressed
    */
   all(...keys: Key[]): boolean {
-    this._init();
+    this.init();
     return keys.every(key => this.on(key));
   },
 
@@ -80,7 +54,7 @@ export const Keyboard = {
    * @returns {boolean}    : Whether any key is pressed
    */
   any(...keys: Key[]): boolean {
-    this._init();
+    this.init();
     return keys.some(key => this.on(key));
   }
 };
