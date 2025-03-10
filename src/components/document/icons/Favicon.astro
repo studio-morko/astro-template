@@ -1,18 +1,13 @@
 ---
 
-import { Document } from "@lib/document/document";
+import { File } from "@lib/file";
 
-/**
- * Icon with optional size
- */
+
 type Icon = {
   path  : string;
   size? : number;
 }
 
-/**
- * Favicon configuration
- */
 type Favicon = {
   ico?   : Icon;          // ICO icon
   png?   : Icon | Icon[]; // PNG icons
@@ -22,11 +17,11 @@ type Favicon = {
 
 interface Props {
   icons: {
+    default?   : Favicon; // Default icons
     lightMode? : Favicon; // Light mode icons
     darkMode?  : Favicon; // Dark mode icons
-    default?   : Favicon; // Default icons
   };
-  manifest? : string; // Web manifest path
+  manifest? : string;     // Web manifest path
 }
 
 const { icons, manifest } = Astro.props;
@@ -36,7 +31,7 @@ const size = (s?: number) => s ? `${s}x${s}` : undefined;
 
 // Get version for cache busting
 const version = (path: string) => {
-  const v = Document.modified(path);
+  const v = File.modified(path);
   return v ? `${path}?v=${v}` : path;
 };
 
