@@ -1,4 +1,7 @@
-import type { EnvVariable } from '@lib/env/env.types';
+/**
+ * Environment variable type
+ */
+export type EnvVariable = string | undefined;
 
 /**
  * Environment variable handling namespace

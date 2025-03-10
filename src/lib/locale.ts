@@ -1,10 +1,46 @@
 import { app }        from '@root/astro.config.mjs';
-import { HTTPError }  from '@lib/error/error';
-import { HTTPStatus } from '@lib/error/error.types';
-import type { MiddlewareHandler }                     from 'astro';
-import type { TranslationStructure, LocaleStructure } from '@lib/locale/locale.types';
+import { HTTPError }  from '@lib/error';
+import { HTTPStatus } from '@lib/error';
+import type { MiddlewareHandler } from 'astro';
+
+/**
+ * Locale configuration, used to configure the custom locale
+ * configuration in the app configuration file.
+ */
+export type LocaleConfig = {
+  enabled  : boolean
+  fallback : string
+  locales  : LocaleSource
+}
+  
+/**
+ * Locale structure defining a language's properties
+ */
+export type LocaleStructure = {
+  name      : string // Language name in English
+  endonym   : string // Language name in its own language
+  direction : string // Text direction (ltr/rtl)
+}
+  
+/**
+ * Translation structure
+ */
+export type TranslationStructure = {
+  [key: string] : string
+}
+
+/**
+ * The source of the locales, can be either a
+ * direct object of locales or a function that
+ * fetches the locales.
+ */
+export type LocaleSource = 
+  | LocaleStructure[]
+  | (() => Promise<LocaleStructure[]>)
+  
 
 // Private state
+const folder       = 'locales';
 const translations = new Map<string, TranslationStructure>();
 const config       = app.i18n;
 let   current      = config.fallback;
@@ -33,7 +69,7 @@ export const Locale = {
     
     try {
       /* @vite-ignore */
-      const module = await import(`../../translations/${code}.ts`);
+      const module = await import(`../${folder}/${code}.ts`);
       translations.set(code, module.default);
     } catch (error) {
       console.error(`Failed to load translations for locale: ${code}`, error);
@@ -171,42 +207,33 @@ export const Locale = {
       
       return next();
     };
+  },
+
+  /**
+   * Adds current locale prefix to a path
+   * 
+   * @param   {string}  path  : Path to add locale prefix to
+   * @param   {boolean} force : Force replace existing locale prefix
+   * @returns {string}        : Path with current locale prefix
+   */
+  url(path: string, force: boolean = false): string {
+    if (path === '' || path === '/') {
+      return `/${this.current}`;
+    }
+
+    const segments = path.split('/').filter(Boolean);
+    const hasLocalePrefix = this.supported.includes(segments[0]);
+
+    // If path has a locale prefix and force is true, remove it
+    if (hasLocalePrefix && force) {
+      path = '/' + segments.slice(1).join('/');
+    }
+
+    // If path already has correct locale prefix, return as is
+    if (hasLocalePrefix && segments[0] === this.current) {
+      return path;
+    }
+
+    return `/${this.current}/${path.replace(/^\//, '')}`;
   }
 };
-
-/**
- * Locale Handling Flow Explained:
- * 1. User Request: https://mysite.com/blog
- *    🌐 Browser Request -> 📟 Server
- * 
- * 2. Middleware Locale Check:
- *    📟 Server
- *    └─► 🔍 Check URL "/blog"
- *        ❌ No locale prefix
- *        └─► 🌍 Detect Locale:
- *            1️⃣ Check Cookie
- *            2️⃣ Check Browser Language
- *            3️⃣ Use Fallback
- *            └─► 🔄 Redirect: /en/blog
- * 
- * 3. Locale Path Case:
- *    🌐 Request: "/en/blog"
- *    └─► 🔍 Check URL
- *        ✅ Has locale prefix "en"
- *        └─► 📝 Set Active Locale
- *            ├─► 🔄 Load Translations
- *            └─► 🍪 Set Cookie
- * 
- * 4. Invalid Locale Case:
- *    🌐 Request: "/xx/blog"
- *    └─► 🔍 Check URL
- *        ❌ Invalid locale "xx"
- *        └─► 🔄 Redirect to fallback
- *            └─► 🌍 /en/blog
- * 
- * 5. Translation Loading:
- *    📝 Set Locale "fi"
- *    └─► 📚 Load Translations
- *        ├─► ✅ Success: Use Finnish
- *        └─► ❌ Error: Use Empty {}
- */

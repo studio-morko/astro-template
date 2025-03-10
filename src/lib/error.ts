@@ -1,8 +1,70 @@
-import { Locale }            from '@lib/locale/locale';
-import { HTTPStatus }        from '@lib/error/error.types';
+import { Locale }            from '@root/src/lib/locale';
 import { app }               from '@root/astro.config.mjs';
-import type { ErrorConfig }       from '@lib/error/error.types';
 import type { MiddlewareHandler } from 'astro';
+
+/**
+ * HTTP status codes we handle
+ */
+export enum HTTPStatus {
+  BadRequest                  = 400,
+  Unauthorized                = 401,
+  PaymentRequired             = 402,
+  Forbidden                   = 403,
+  NotFound                    = 404,
+  MethodNotAllowed            = 405,
+  NotAcceptable               = 406,
+  ProxyAuthRequired           = 407,
+  RequestTimeout              = 408,
+  Conflict                    = 409,
+  Gone                        = 410,
+  LengthRequired              = 411,
+  PreconditionFailed          = 412,
+  PayloadTooLarge             = 413,
+  URITooLong                  = 414,
+  UnsupportedMediaType        = 415,
+  RangeNotSatisfiable         = 416,
+  ExpectationFailed           = 417,
+  ImATeapot                   = 418,
+  MisdirectedRequest          = 421,
+  UnprocessableEntity         = 422,
+  Locked                      = 423,
+  FailedDependency            = 424,
+  TooEarly                    = 425,
+  UpgradeRequired             = 426,
+  PreconditionRequired        = 428,
+  TooManyRequests             = 429,
+  RequestHeaderFieldsTooLarge = 431,
+  UnavailableForLegalReasons  = 451,
+  ServerError                 = 500,
+  NotImplemented              = 501,
+  BadGateway                  = 502,
+  ServiceUnavailable          = 503,
+  GatewayTimeout              = 504,
+  HTTPVersionNotSupported     = 505,
+  VariantAlsoNegotiates       = 506,
+  InsufficientStorage         = 507,
+  LoopDetected                = 508,
+  NotExtended                 = 510,
+  NetworkAuthRequired         = 511
+}
+
+/**
+ * Error status type
+ */
+export type ErrorStatus = HTTPStatus;
+
+/**
+ * Error configuration type is used to
+ * define all supported errors, and their fallback values
+ */
+export type ErrorConfig = {
+  enabled   : boolean;
+  supported : ErrorStatus[];
+  fallback  : {
+    clientError : ErrorStatus; // Default for 4xx errors (like 400)
+    serverError : ErrorStatus; // Default for 5xx errors (like 500)
+  }
+};
 
 // Private state
 let currentStatus = HTTPStatus.NotFound;
@@ -130,7 +192,7 @@ export const HTTPError = {
     };
   },
 
-   /**
+  /**
    * Create error response with HTML error page
    */
    async createPageResponse(url: URL, status: number, message?: string): Promise<Response> {
@@ -157,8 +219,8 @@ export const HTTPError = {
   },
 
   /**
-   * Create plain text error response
-   */
+  * Create plain text error response
+  */
   createTextResponse(status: number, message?: string): Response {
     return new Response(message || this.description, {
       status,
@@ -166,41 +228,3 @@ export const HTTPError = {
     });
   }
 }; 
-
-/**
- * Error Handling Flow Explained:
- * 1. User Request: https://mysite.com/blog/article
- *    🌐 Browser Request -> 📟 Server
- * 
- * 2. Middleware URL Check:
- *    📟 Server
- *    └─► 🔍 Check URL "/blog/article"
- *        ❌ Not in ignore list [/_, .jpg, .css, etc]
- *        ✅ Continue to error handling
- * 
- * 3. Success Case:
- *    🎯 Process Request
- *    └─► ✨ Success (200 OK)
- *        └─► 📄 Return content
- * 
- * 4. Error Case - Not Found:
- *    🎯 Process Request
- *    └─► ❌ 404 Not Found
- *        └─► 🔄 Error Handler
- *            ├─► 📝 Set status: 404
- *            └─► 🎨 Return error page
- * 
- * 5. Error Case - Server Error:
- *    🎯 Process Request
- *    └─► 💥 Server Error
- *        └─► 🔄 Error Handler
- *            ├─► 📝 Set status: 500
- *            └─► 🎨 Return error page
- * 
- * 6. Ignored URL Case:
- *    🌐 Request: "/images/photo.jpg"
- *    └─► 🔍 Check URL
- *        ├─► ✅ Contains ".jpg" (in ignore list)
- *        └─► ⏭️ Skip error handling
- *            └─► 📸 Serve directly
- */
