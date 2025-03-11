@@ -1,9 +1,9 @@
 html {
-  font-size       : var(--font-size);
+  font-size       : var(--fs-base);
 }
 
 body {
-  font-family     : var(--font-family-sans);
+  font-family     : var(--ff-sans);
   background-color: var(--background-color);
   color           : var(--text-color-primary);
 }

@@ -3,6 +3,7 @@
   /* Where n is the pixel value divided by 4 */
   --space-50  : 0.2rem;  /*  2px */
   --space-100 : 0.4rem;  /*  4px */
+  --space-150 : 0.6rem;  /*  6px */
   --space-200 : 0.8rem;  /*  8px */
   --space-300 : 1.2rem;  /* 12px */
   --space-400 : 1.6rem;  /* 16px */

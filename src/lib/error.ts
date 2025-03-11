@@ -1,4 +1,4 @@
-import { Locale }            from '@root/src/lib/locale';
+import { Locale }            from '@lib/locale';
 import { app }               from '@root/astro.config.mjs';
 import type { MiddlewareHandler } from 'astro';
 

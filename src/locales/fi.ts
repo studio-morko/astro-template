@@ -6,6 +6,9 @@ export default {
   // Page: Home
   "page.home.title" : "Kotisivu",
 
+  // Page: Error
+  "page.error.return" : "Palaa etusivulle",
+
   // HTTP-virheet:
   "error.400.title"       : "Virheellinen pyyntö",
   "error.400.description" : "Palvelin ei voi käsitellä pyyntöä asiakasvirheen vuoksi",

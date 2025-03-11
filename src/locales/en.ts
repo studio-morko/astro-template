@@ -6,6 +6,9 @@ export default {
   // Page: Home
   "page.home.title" : "Home page",
 
+  // Page: Error
+  "page.error.return" : "Return to home",
+
   // HTTP Errors: 
   "error.400.title"       : "Bad Request",
   "error.400.description" : "The server cannot process the request due to a client error",
