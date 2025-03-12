@@ -1,0 +1,7 @@
+:root {
+  --radius-none   : 0;
+  --radius-small  : 0.4rem;
+  --radius-medium : 0.8rem;
+  --radius-large  : 1.2rem;
+  --radius-full   : 9999px;
+}

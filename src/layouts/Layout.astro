@@ -1,7 +1,32 @@
 ---
 
-import { Locale }   from '@library/locale/locale';
-import Head         from '@components/Head/Head.astro';
+import { Locale } from '@lib/locale';
+import Head       from '@document/Head.astro';
+
+// Fonts
+import '@styles/fonts/Inter.css';
+import '@styles/fonts/JetBrainsMono.css';
+
+// Tokens
+import '@styles/utils/reset.css';
+import '@styles/tokens/colors.css';
+import '@styles/tokens/layers.css';
+import '@styles/tokens/motion.css';
+import '@styles/tokens/radius.css';
+import '@styles/tokens/shadows.css';
+import '@styles/tokens/spaces.css';
+import '@styles/tokens/typography.css';
+
+// Styles
+import '@styles/main.css';
+
+interface Props {
+  align?: 'center' | 'left' | 'right';
+}
+
+const { 
+  align = 'left'
+}: Props = Astro.props;
 
 ---
 
@@ -9,6 +34,34 @@ import Head         from '@components/Head/Head.astro';
 <html lang={Locale.current}>
   <Head />
 	<body>
-		<slot />
+    <main class={align}>
+      <slot />
+    </main>
 	</body>
 </html>
+
+<style>  
+  main {
+    display        : flex;
+    flex-direction : column;
+    min-height     : 100dvh;
+  }
+
+  .center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  
+  .right {
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+
+  
+</style>

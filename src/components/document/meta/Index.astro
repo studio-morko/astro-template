@@ -1,0 +1,13 @@
+---
+
+interface Props {
+  value: boolean;
+}
+
+const { 
+  value
+} = Astro.props;
+
+---
+
+<meta name="robots" content={value ? 'index' : 'noindex'} /> 

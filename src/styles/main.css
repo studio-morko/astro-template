@@ -1,0 +1,10 @@
+html {
+  font-size       : var(--fs-base);
+}
+
+body {
+  font-family     : var(--ff-sans);
+  background-color: var(--background-color);
+  color           : var(--text-color-primary);
+}
+
