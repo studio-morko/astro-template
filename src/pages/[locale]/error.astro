@@ -13,7 +13,7 @@ const description = HTTPError.description;
 Metadata.set({
   absolute    : true,
   template    : '%s',
-  title       : `${status} | ${title}`,
+  title       : `${status} - ${title}`,
   description : description,
   index       : false,
   follow      : false,
@@ -44,152 +44,153 @@ const isClientError = status >= 400 && status < 500;
 </Layout>
 
 <style>
-:global(main) {
-  padding-bottom: 15dvh;
-}
 
-section[data-section="error"] {
-  --btn-stroke-size: 1.5px;
-  --btn-stroke: var(--color-zinc-700);
-  --btn-stroke-hover: var(--color-zinc-600);
-  --btn-background: var(--color-zinc-800);
-  --btn-background-hover: var(--color-zinc-700);
-  --btn-text: var(--color-zinc-100);
-  --btn-text-hover: var(--color-zinc-50);
-
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-500);
-  max-width: 44rem;
-  padding: var(--space-400);
-  background-color: var(--color-white);
-  border-radius: var(--radius-large);
-
-  &[data-error="server"] {
-    .chip {
-      background-color: var(--color-red-100);
-      color: var(--color-red-800);
-    }
+  :global(main) {
+    padding-bottom : 15dvh;
   }
 
-  &[data-error="client"] {
-    .chip {
-      background-color: var(--color-orange-100);
-      color: var(--color-orange-800);
-    }
-  }
-   
-  .chip {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-    font-size: var(--fs-400);
-    font-weight: var(--fw-600);
-    font-family: var(--ff-sans);
-    padding: var(--space-150) var(--space-500);
-    border-radius: var(--radius-medium);
+  section[data-section="error"] {
+    --btn-stroke-size      : 1.5px;
+    --btn-stroke           : var(--color-zinc-700);
+    --btn-stroke-hover     : var(--color-zinc-600);
+    --btn-background       : var(--color-zinc-800);
+    --btn-background-hover : var(--color-zinc-700);
+    --btn-text             : var(--color-zinc-100);
+    --btn-text-hover       : var(--color-zinc-50);
 
-    span {
-      font-size: inherit;
-      letter-spacing: var(--ls-wide);
-    }
-  }
+    display          : flex;
+    flex-direction   : column;
+    gap              : var(--space-500);
+    max-width        : 44rem;
+    width            : 100%;
+    padding          : var(--space-400);
+    border-radius    : var(--radius-large);
 
-  .content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-700);
-
-    .info {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-100);
-
-      h1 {
-        font-size: var(--fs-600);
-        font-weight: var(--fw-600);
-        line-height: var(--lh-tight);
-        letter-spacing: var(--ls-dense);
-        margin: 0;
-        color: var(--color-zinc-950);
-      }
-
-      p {
-        font-size: var(--fs-500);
-        font-weight: var(--fw-400);
-        line-height: var(--lh-normal);
-        color: var(--color-zinc-700);
+    &[data-error="server"] {
+      .chip {
+        background-color : var(--color-red-100);
+        color            : var(--color-red-800);
       }
     }
 
-    .actions {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-400);
-      
-      a {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        font-size: var(--fs-450);
-        font-weight: var(--fw-500);
-        line-height: var(--lh-normal);
-        text-decoration: none;
-        color: var(--btn-text);
-        padding: var(--space-200) var(--space-400);
-        border-radius: var(--radius-large);
-        border: var(--btn-stroke-size) solid var(--btn-stroke);
-        outline: var(--btn-stroke-size) solid var(--btn-background);
-        background-color: var(--btn-background);
-        transition: outline-color 0.2s ease-in, 
-                    border-color 0.2s ease-in;
+    &[data-error="client"] {
+      .chip {
+        background-color : var(--color-orange-100);
+        color            : var(--color-orange-800);
+      }
+    }
+    
+    .chip {
+      display         : flex;
+      align-items     : center;
+      justify-content : center;
+      width           : fit-content;
+      font-size       : var(--fs-400);
+      font-weight     : var(--fw-600);
+      font-family     : var(--ff-sans);
+      padding         : var(--space-150) var(--space-500);
+      border-radius   : var(--radius-medium);
 
-        & > span {
-          position: relative;
-          z-index: 2;
-          font-size: inherit;
+      span {
+        font-size      : inherit;
+        letter-spacing : var(--ls-wide);
+      }
+    }
+
+    .content {
+      display        : flex;
+      flex-direction : column;
+      gap            : var(--space-700);
+
+      .info {
+        display        : flex;
+        flex-direction : column;
+        gap            : var(--space-100);
+
+        h1 {
+          font-size      : var(--fs-600);
+          font-weight    : var(--fw-600);
+          line-height    : var(--lh-tight);
+          letter-spacing : var(--ls-dense);
+          margin         : 0;
+          color          : var(--color-zinc-950);
         }
 
-        .overlay {
-          --overlay-opacity: 0%;
-          --overlay-speed: 900ms;
-          --overlay-size: 105%;
-
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 1;
-          pointer-events: none;
-          background: repeating-linear-gradient(
-            -55deg,
-            var(--btn-background),
-            var(--btn-background) 10px,
-            var(--btn-stroke) 10px,
-            var(--btn-stroke) 20px
-          );
-          opacity: var(--overlay-opacity);
-          background-size: var(--overlay-size) var(--overlay-size);
-          background-position: 0% 0%;
-          transition: opacity calc(var(--overlay-speed) / 2) ease-in-out,
-                     background-position var(--overlay-speed) ease-in-out;
+        p {
+          font-size   : var(--fs-500);
+          font-weight : var(--fw-400);
+          line-height : var(--lh-normal);
+          color       : var(--color-zinc-700);
         }
+      }
 
-        &:hover {
-          outline-color: var(--btn-background-hover);
-          border-color: var(--btn-stroke-hover);
+      .actions {
+        display        : flex;
+        flex-direction : column;
+        gap            : var(--space-400);
+        
+        a {
+          position         : relative;
+          display          : flex;
+          align-items      : center;
+          justify-content  : center;
+          overflow         : hidden;
+          font-size        : var(--fs-450);
+          font-weight      : var(--fw-500);
+          line-height      : var(--lh-normal);
+          text-decoration  : none;
+          color            : var(--btn-text);
+          padding          : var(--space-200) var(--space-400);
+          border-radius    : var(--radius-large);
+          border           : var(--btn-stroke-size) solid var(--btn-stroke);
+          outline          : var(--btn-stroke-size) solid var(--btn-background);
+          background-color : var(--btn-background);
+          transition       : outline-color 0.2s ease-in,
+                             border-color 0.2s ease-in;
+
+          & > span {
+            position  : relative;
+            z-index   : 2;
+            font-size : inherit;
+          }
 
           .overlay {
-            --overlay-opacity: 20%;
-            background-position: 100% 100%;
+            --overlay-opacity : 0%;
+            --overlay-speed   : 900ms;
+            --overlay-size    : 105%;
+
+            position       : absolute;
+            top            : 0;
+            left           : 0;
+            right          : 0;
+            bottom         : 0;
+            z-index        : 1;
+            pointer-events : none;
+            background     : repeating-linear-gradient(
+              -55deg,
+              var(--btn-background),
+              var(--btn-background) 10px,
+              var(--btn-stroke) 10px,
+              var(--btn-stroke) 20px
+            );
+            opacity             : var(--overlay-opacity);
+            background-size     : var(--overlay-size) var(--overlay-size);
+            background-position : 0% 0%;
+            transition          : opacity calc(var(--overlay-speed) / 2) ease-in-out,
+                                  background-position var(--overlay-speed) ease-in-out;
+          }
+
+          &:hover {
+            outline-color : var(--btn-background-hover);
+            border-color  : var(--btn-stroke-hover);
+
+            .overlay {
+              --overlay-opacity   : 20%;
+              background-position : -100% -100%;
+            }
           }
         }
       }
     }
   }
-}
 </style>

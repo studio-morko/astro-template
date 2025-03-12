@@ -4,7 +4,9 @@
 export default {
 
   // Page: Home
-  "page.home.title" : "Kotisivu",
+  "page.home.title"       : "Astro Starter Template",
+  "page.home.description" : "Astro starter template, jolla on tärkeimmät kehitystyökalut: SEO-optimointi, dynaaminen i18n-tuki, virhekäsittely, käyttöliittymäfunktiot ja suunnittelutoknit.",
+  "page.home.keywords"    : "astro, template, starter, template, design, tokens, utility, functions, error, handling, i18n, optimization, seo",
 
   // Page: Error
   "page.error.return" : "Palaa etusivulle",

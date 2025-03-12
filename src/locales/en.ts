@@ -4,7 +4,9 @@
 export default {
 
   // Page: Home
-  "page.home.title" : "Home page",
+  "page.home.title"       : "Astro Starter Template",
+  "page.home.description" : "A robust Astro starter template with essential developer tooling: SEO optimization, dynamic i18n support, error handling, utility functions, and design tokens.",
+  "page.home.keywords"    : "astro, template, starter, template, design, tokens, utility, functions, error, handling, i18n, optimization, seo",
 
   // Page: Error
   "page.error.return" : "Return to home",

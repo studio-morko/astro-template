@@ -1,37 +1,57 @@
 ---
 import Layout       from '@layouts/Layout.astro';
-import { Locale }   from '@lib/locale/locale';
-import { Metadata } from '@lib/metadata/metadata';
-import { Env }      from '@lib/env/env';
-import Link         from '@components/ui/Link/Link.astro';
+import { Locale }   from '@lib/locale';
+import { Metadata } from '@lib/metadata';
 
-export async function getStaticPaths() {
+export function getStaticPaths() {
   return Locale.supported.map(locale => ({
     params: { locale }
   }));
 }
 
-const supported = Locale.supported;
-const current   = Locale.current;
-
-// Example of setting metadata
 Metadata.set({
-	title: 'Homepage',
-	description: 'A robust Astro starter template with essential developer tooling: SEO optimization, dynamic i18n support, error handling, utility functions, and design tokens. Foundation for building production-ready websites.',
-	keywords: ['astro', 'template'],
+  title: Locale.t('page.home.title'),
+  description: Locale.t('page.home.description'),
+  keywords: Locale.t('page.home.keywords').split(','),
 });
 
-console.log(supported);
-console.log(Locale.info('en'));
 ---
 
-<Layout>
-  <span>{Env.get('NODE_ENV')}</span>
-  <h1>{Locale.t('page.home.title')}: ({current})</h1>
-  <div style="display: flex; gap: 10px;">
-    {supported.map(locale => {
-      const info = Locale.info(locale);
-      return <Link url={`/${locale}`} external={false}>{info.endonym}</Link>
-    })}
-  </div>
+<Layout align="center">
+  <section data-section="hero">
+    <h1>{Locale.t('page.home.title')}</h1>
+    <p>{Locale.t('page.home.description')}</p>
+  </section>
 </Layout>
+
+<style>
+  :global(main) {
+    padding-bottom : 15dvh;
+  }
+
+  section[data-section="hero"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-400);
+    max-width: 62rem;
+
+    h1 {
+      font-size: var(--fs-800);
+      font-weight: var(--fw-700);
+      line-height: var(--lh-normal);
+      text-align: center;
+      margin: 0;
+    }
+
+    p {
+      font-size: var(--fs-500);
+      font-weight: var(--fw-400);
+      line-height: var(--lh-normal);
+      text-align: center;
+      color: var(--color-zinc-700);
+    }
+
+  }
+</style>
