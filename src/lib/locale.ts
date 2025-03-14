@@ -173,6 +173,11 @@ export const Locale = {
    */
   middleware(): MiddlewareHandler {
     return async ({ cookies, request, url }, next) => {
+      // Skip Astro's internal routes
+      if (url.pathname.startsWith('/_')) {
+        return next();
+      }
+
       const urlParts     = url.pathname.split('/').filter(Boolean);
       const firstSegment = urlParts[0];
 
