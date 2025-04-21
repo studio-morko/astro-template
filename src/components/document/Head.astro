@@ -1,27 +1,4 @@
 ---
-import { Metadata } from "@lib/metadata"
-
-import Title       from "@document/meta/Title.astro"
-import Description from "@document/meta/Description.astro"
-import Keywords    from "@document/meta/Keywords.astro"
-import Index       from "@document/meta/Index.astro"
-import Follow      from "@document/meta/Follow.astro"
-import Canonical   from "@document/meta/Canonical.astro"
-import OpenGraph   from "@document/social/OpenGraph.astro"
-import Twitter     from "@document/social/Twitter.astro"
-import Favicon     from "@document/icons/Favicon.astro"
-
-const metadata = {
-  title       : Metadata.title,
-  description : Metadata.description,
-  keywords    : Metadata.keywords,
-  index       : Metadata.index,
-  follow      : Metadata.follow,
-  image       : Metadata.image,
-  type        : Metadata.type,
-}
-
-const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 
 ---
 
@@ -29,44 +6,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <meta name="generator" content={Astro.generator} />
-  
-  <Title value={metadata.title} />
-  <Description value={metadata.description} />
-  <Keywords value={metadata.keywords} />
-
-  <Index value={metadata.index} />
-  <Follow value={metadata.follow} />
-  <Canonical value={canonical} />
-
-  <OpenGraph
-    title={metadata.title}
-    description={metadata.description}
-    image={metadata.image}
-    url={canonical}
-    type={metadata.type}
-  />
-  
-  <Twitter
-    title={metadata.title}
-    description={metadata.description}
-    image={metadata.image}
-  />
-
-  <Favicon 
-    icons={{
-      default: {
-        ico : { path: "/favicon/favicon.ico" },
-        png : [
-          { path: "/favicon/favicon-16.png", size: 16 },
-          { path: "/favicon/favicon-32.png", size: 32 },
-          { path: "/favicon/favicon-192.png", size: 192 },
-          { path: "/favicon/favicon-512.png", size: 512 }
-        ],
-        apple : { path: "/favicon/apple-touch-icon.png", size: 180 }
-      }
-    }}
-  />
-
   <slot />
 </head>
 

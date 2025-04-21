@@ -1,0 +1,35 @@
+---
+import { Locale } from '@lib/locale';
+
+interface Props {
+  href       : string;  // URL or path for the link 
+  external?  : boolean; // Whether the link points to an external resource
+  localized? : boolean; // Whether to prepend the current locale to the URL (defaults to i18n setting)
+  class?     : string;  // Additional CSS classes
+}
+
+const { 
+  href,       
+  external  = false,
+  localized = Locale.enabled,
+  class : className
+} = Astro.props;
+
+// Only localize if:
+// 1. Not an external link
+// 2. Localization is enabled for this link
+// 3. i18n is enabled globally
+const url = external || !localized || !Locale.enabled 
+  ? href 
+  : Locale.url(href);
+
+const classes = ['link', className].filter(Boolean);
+---
+
+<a 
+  href={url}
+  class:list={classes}
+  {...external && { target: "_blank", rel: "noopener noreferrer" }}
+>
+  <slot />
+</a>

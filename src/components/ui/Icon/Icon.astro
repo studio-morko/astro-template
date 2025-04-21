@@ -1,0 +1,67 @@
+---
+interface Props {
+  icon         : any;
+  size?        : number;
+  strokeWidth? : number;
+  title?       : string;
+  fill?        : boolean;
+}
+
+const { 
+  icon, 
+  title,
+  size        = 24,
+  strokeWidth = 2,
+  fill        = false,
+} = Astro.props;
+
+let content = "";
+if (Array.isArray(icon)) {
+  content = icon.map(([shape, attrs]) => {
+    const attributes = Object.entries(attrs)
+      .map(([k, v]) => `${k}="${v}"`)
+      .join(" ");
+    return `<${shape} ${attributes}></${shape}>`;
+  }).join("");
+} else if (typeof icon === 'string') {
+  content = icon;
+}
+
+const attributes = {
+  xmlns             : "http://www.w3.org/2000/svg",
+  viewBox           : "0 0 24 24",
+  width             : size,
+  height            : size,
+  fill              : fill ? "currentColor" : "none",
+  stroke            : "currentColor",
+  "stroke-width"    : strokeWidth,
+  "stroke-linecap"  : "round",
+  "stroke-linejoin" : "round",
+  "aria-hidden"     : title ? "false" : "true",
+  role              : "img",
+  focusable         : "false",
+} as any;
+
+---
+
+<span class={`lucide-icon`}>
+  <svg {...attributes}>
+    {title && <title>{title}</title>}
+    <Fragment set:html={content} />
+  </svg>
+</span>
+
+<style>
+  .lucide-icon {
+    display         : inline-flex;
+    align-items     : center;
+    justify-content : center;
+    line-height     : 1;
+    vertical-align  : middle;
+
+    svg {
+      width  : 100%;
+      height : 100%;
+    }
+  }
+</style>

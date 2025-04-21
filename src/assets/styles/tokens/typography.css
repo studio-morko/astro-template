@@ -1,7 +1,8 @@
 :root {
   /* Font Family */
-  --ff-sans : 'Inter', sans-serif;
-  --ff-mono : 'JetBrainsMono', ui-monospace, monospace;
+  --ff-sans    : 'Inter', sans-serif;
+  --ff-display : 'Intro', serif;
+  --ff-mono    : 'JetBrainsMono', ui-monospace, monospace;
 
   /* Base Font Size: 62.5% of 16px = 10px */
   --fs-base : 62.5%;
@@ -57,15 +58,30 @@
 }
 
 data {
-  font-feature-settings   : "cv01", "cv03", "cv04", "cv09", "tnum";
+  font-feature-settings : "cv01", "cv03", "cv04", "cv09", "tnum";
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family             : var(--ff-display);
+  font-family : var(--ff-sans);
 }
 
 @supports (font-variation-settings: normal) {
   :root { 
-    --ff-sans           : "Inter-Variable", ui-sans-serif, sans-serif;
+    --ff-sans : "Inter-Variable", ui-sans-serif, sans-serif;
   }
 }
+
+/* Medium screen */
+@media (min-width: 1400px) {
+  :root {
+    --fs-base : 68.75%;
+  }
+}
+
+/* Small screen */
+@media (max-width: 520px) {
+  :root {
+    --fs-base : 56.25%;
+  }
+}
+

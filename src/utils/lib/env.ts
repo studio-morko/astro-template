@@ -13,6 +13,10 @@ export const Env = {
    * @returns {string}     : The value of the environment variable
    */
   get(key: string): EnvVariable {
+    // Handle special cases for environment mode
+    if (key === 'NODE_ENV') {
+      return import.meta.env.PROD ? 'production' : 'development';
+    }
     const value = import.meta.env[key];
     if (value === undefined) {
       throw new Error(`Environment variable not found: ${key}`);
@@ -26,6 +30,9 @@ export const Env = {
    * @returns {boolean}     : True if the environment variable exists
    */
   has(key: string): boolean {
+    if (key === 'NODE_ENV') {
+      return true; // NODE_ENV is always available via PROD/DEV
+    }
     return key in import.meta.env;
   },
 

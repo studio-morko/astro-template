@@ -1,5 +1,7 @@
 ---
+import Root         from '@layouts/Root.astro';
 import Layout       from '@layouts/Layout.astro';
+
 import { Locale }   from '@lib/locale';
 import { Metadata } from '@lib/metadata';
 
@@ -9,20 +11,20 @@ export function getStaticPaths() {
   }));
 }
 
-Metadata.set({
-  title: Locale.t('page.home.title'),
-  description: Locale.t('page.home.description'),
-  keywords: Locale.t('page.home.keywords').split(','),
-});
-
 ---
 
-<Layout align="center">
-  <section data-section="hero">
-    <h1>{Locale.t('page.home.title')}</h1>
-    <p>{Locale.t('page.home.description')}</p>
-  </section>
-</Layout>
+<Root metadata={{
+  title       : Locale.t('page.home.title'),
+  description : Locale.t('page.home.description'),
+  keywords    : Locale.t('page.home.keywords').split(','),
+}}/>
+  <Layout align="center">
+    <section data-section="hero">
+      <h1>{Locale.t('page.home.title')}</h1>
+      <p>{Locale.t('page.home.description')}</p>
+    </section>
+  </Layout>
+</Root>
 
 <style>
   :global(main) {
