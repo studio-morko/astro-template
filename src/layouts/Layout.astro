@@ -1,13 +1,7 @@
 ---
 
-import { Locale } from '@lib/locale';
-import Head       from '@document/Head.astro';
-
-// Fonts
+// Styles
 import '@styles/fonts/Inter.css';
-import '@styles/fonts/JetBrainsMono.css';
-
-// Tokens
 import '@styles/utils/reset.css';
 import '@styles/tokens/colors.css';
 import '@styles/tokens/layers.css';
@@ -16,8 +10,7 @@ import '@styles/tokens/radius.css';
 import '@styles/tokens/shadows.css';
 import '@styles/tokens/spaces.css';
 import '@styles/tokens/typography.css';
-
-// Styles
+import '@styles/semantics.css';
 import '@styles/main.css';
 
 interface Props {
@@ -30,38 +23,43 @@ const {
 
 ---
 
-<!DOCTYPE html>
-<html lang={Locale.current}>
-  <Head />
-	<body>
-    <main class={align}>
-      <slot />
-    </main>
-	</body>
-</html>
+<main class={align}>
+  <slot />
+</main>
 
 <style>  
   main {
     display        : flex;
     flex-direction : column;
-    min-height     : 100dvh;
+    min-height     : 100svh;
+    max-width      : var(--max-width);
+    margin         : 0 auto;
+    margin-top     : var(--navigation-height);
+    padding-bottom : 10svh;
+
+    &.center {
+      justify-content : center;
+      align-items     : center;
+    }
+    &.left {
+      justify-content : flex-start;
+      align-items     : flex-start;
+    }
+    &.right {
+      justify-content : flex-end;
+      align-items     : flex-end;
+    }
   }
 
-  .center {
-    justify-content: center;
-    align-items: center;
+  :global(section) {
+    margin-bottom : var(--section-padding);
+    width         : 100%;
   }
 
-  .left {
-    justify-content: flex-start;
-    align-items: flex-start;
+  :global(section > h2) {
+    font-size    : var(--fs-1000);
+    font-weight  : var(--fw-500);
+    word-spacing : 0.02rem;
+    color        : var(--color-text-primary);
   }
-  
-  .right {
-    justify-content: flex-end;
-    align-items: flex-end;
-  }
-
-
-  
 </style>

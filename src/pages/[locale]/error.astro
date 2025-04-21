@@ -1,47 +1,46 @@
 ---
+import Root           from "@layouts/Root.astro";
 import Layout         from "@layouts/Layout.astro";
+
 import { HTTPError }  from '@lib/error';
-import { Metadata }   from '@lib/metadata';
-import { Locale } from "@root/src/lib/locale";
+import { Locale }     from "@lib/locale";
 
 export const prerender = false;
 
 const status      = HTTPError.status;
 const title       = HTTPError.title;
 const description = HTTPError.description;
-
-Metadata.set({
-  absolute    : true,
-  template    : '%s',
-  title       : `${status} - ${title}`,
-  description : description,
-  index       : false,
-  follow      : false,
-});
-
 const isClientError = status >= 400 && status < 500;
 
 ---
 
-<Layout align="center">
-  <section data-section="error" data-error={isClientError ? 'client' : 'server'}>
-    <div class="chip" aria-hidden="true">
-      <data class="status">{status}</data>
-    </div>
-    <div class="content">
-      <div class="info">
-        <h1 aria-label={`${status}: ${title}`}>{title}</h1>
-        <p>{description}</p>
+<Root metadata={{
+  title       : `${status} - ${title}`,
+  description : description,
+  index       : false,
+  follow      : false,
+}} />
+
+  <Layout align="center">
+    <section data-section="error" data-error={isClientError ? 'client' : 'server'}>
+      <div class="chip" aria-hidden="true">
+        <data class="status">{status}</data>
       </div>
-      <div class="actions">
-        <a href={Locale.enabled ? Locale.url('/') : '/'}>
-          <span>{Locale.t('page.error.return')}</span>
-          <div class="overlay striped"></div>
-        </a>
+      <div class="content">
+        <div class="info">
+          <h1 aria-label={`${status}: ${title}`}>{title}</h1>
+          <p>{description}</p>
+        </div>
+        <div class="actions">
+          <a href={Locale.enabled ? Locale.url('/') : '/'}>
+            <span>{Locale.t('page.error.return')}</span>
+            <div class="overlay striped"></div>
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
-</Layout>
+    </section>
+  </Layout>
+</Root>
 
 <style>
 

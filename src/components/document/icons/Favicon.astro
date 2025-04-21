@@ -1,8 +1,5 @@
 ---
 
-import { File } from "@lib/file";
-
-
 type Icon = {
   path  : string;
   size? : number;
@@ -29,15 +26,11 @@ const { icons, manifest } = Astro.props;
 // Helper to format size
 const size = (s?: number) => s ? `${s}x${s}` : undefined;
 
-// Get version for cache busting
-const version = (path: string) => {
-  const v = File.modified(path);
-  return v ? `${path}?v=${v}` : path;
-};
+// Generate a random ID for cache busting
+const randomId = Math.random().toString(36).substring(2, 15);
 
-// Helper to add version
-const href = (path: string, version?: number) =>
-  version ? `${path}?v=${version}` : path;
+// Helper to add random ID for cache busting
+const href = (path: string) => `${path}?v=${randomId}`;
 
 ---
 
@@ -49,7 +42,7 @@ const href = (path: string, version?: number) =>
   <link 
     rel   = "icon"
     type  = "image/x-icon"
-    href  = {version(icons.default.ico.path)}
+    href  = {href(icons.default.ico.path)}
     sizes = {size(icons.default.ico.size)}
   />
 }
@@ -59,7 +52,7 @@ const href = (path: string, version?: number) =>
   <link 
     rel   = "icon"
     type  = "image/svg+xml"
-    href  = {version(icons.default.svg.path)}
+    href  = {href(icons.default.svg.path)}
     sizes = {size(icons.default.svg.size)}
   />
 }
@@ -70,7 +63,7 @@ const href = (path: string, version?: number) =>
   <link 
     rel   = "icon"
     type  = "image/png"
-    href  = {version(png.path)}
+    href  = {href(png.path)}
     sizes = {size(png.size)}
   />
 )}
@@ -79,7 +72,7 @@ const href = (path: string, version?: number) =>
 {icons.default?.apple && 
   <link 
     rel   = "apple-touch-icon"
-    href  = {version(icons.default.apple.path)}
+    href  = {href(icons.default.apple.path)}
     sizes = {size(icons.default.apple.size)}
   />
 }
@@ -89,7 +82,7 @@ const href = (path: string, version?: number) =>
   <link 
     rel   = "icon"
     type  = "image/x-icon"
-    href  = {version(icons.lightMode.ico.path)}
+    href  = {href(icons.lightMode.ico.path)}
     sizes = {size(icons.lightMode.ico.size)}
     media = "(prefers-color-scheme: light)"
   />
@@ -100,7 +93,7 @@ const href = (path: string, version?: number) =>
   <link 
     rel   = "icon"
     type  = "image/svg+xml"
-    href  = {version(icons.lightMode.svg.path)}
+    href  = {href(icons.lightMode.svg.path)}
     sizes = {size(icons.lightMode.svg.size)}
     media = "(prefers-color-scheme: light)"
   />
@@ -112,7 +105,7 @@ const href = (path: string, version?: number) =>
   <link 
     rel   = "icon"
     type  = "image/png"
-    href  = {version(png.path)}
+    href  = {href(png.path)}
     sizes = {size(png.size)}
     media = "(prefers-color-scheme: light)"
   />
@@ -123,7 +116,7 @@ const href = (path: string, version?: number) =>
   <link 
     rel   = "icon"
     type  = "image/x-icon"
-    href  = {version(icons.darkMode.ico.path)}
+    href  = {href(icons.darkMode.ico.path)}
     sizes = {size(icons.darkMode.ico.size)}
     media = "(prefers-color-scheme: dark)"
   />
@@ -134,7 +127,7 @@ const href = (path: string, version?: number) =>
   <link 
     rel   = "icon"
     type  = "image/svg+xml"
-    href  = {version(icons.darkMode.svg.path)}
+    href  = {href(icons.darkMode.svg.path)}
     sizes = {size(icons.darkMode.svg.size)}
     media = "(prefers-color-scheme: dark)"
   />
@@ -146,7 +139,7 @@ const href = (path: string, version?: number) =>
   <link 
     rel   = "icon"
     type  = "image/png"
-    href  = {version(png.path)}
+    href  = {href(png.path)}
     sizes = {size(png.size)}
     media = "(prefers-color-scheme: dark)"
   />

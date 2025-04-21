@@ -1,0 +1,24 @@
+:root{
+  body {
+    --shadow-small : 
+      0px 0.3px 0.3px        color-mix(in srgb, var(--shadow-color) 52%, transparent),
+      0px 0.5px 0.5px -1.9px color-mix(in srgb, var(--shadow-color) 40%, transparent),
+      0px 1.2px 1.1px -3.7px color-mix(in srgb, var(--shadow-color) 29%, transparent);
+
+    --shadow-medium : 
+      0.0px 0.3px 0.3px        color-mix(in srgb, var(--shadow-color) 54%, transparent),
+      0.0px 0.8px 0.8px -1.2px color-mix(in srgb, var(--shadow-color) 45%, transparent),
+     -0.1px 2.3px 2.2px -2.5px color-mix(in srgb, var(--shadow-color) 36%, transparent),
+     -0.1px 6.2px 5.8px -3.7px color-mix(in srgb, var(--shadow-color) 27%, transparent);
+
+    --shadow-large : 
+      0.0px 00.3px 00.3px        color-mix(in srgb, var(--shadow-color) 50%, transparent),
+      0.0px 01.1px 01.0px -0.5px color-mix(in srgb, var(--shadow-color) 46%, transparent),
+     -0.1px 02.2px 02.1px -1.1px color-mix(in srgb, var(--shadow-color) 42%, transparent),
+     -0.1px 04.2px 03.9px -1.6px color-mix(in srgb, var(--shadow-color) 38%, transparent),
+     -0.2px 07.5px 07.0px -2.1px color-mix(in srgb, var(--shadow-color) 34%, transparent),
+     -0.3px 12.8px 12.0px -2.7px color-mix(in srgb, var(--shadow-color) 29%, transparent),
+     -0.5px 20.5px 19.2px -3.2px color-mix(in srgb, var(--shadow-color) 25%, transparent),
+     -0.7px 31.2px 29.3px -3.7px color-mix(in srgb, var(--shadow-color) 21%, transparent);
+  } 
+}

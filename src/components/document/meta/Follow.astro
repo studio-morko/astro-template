@@ -1,10 +1,17 @@
 ---
+import { Env } from '@lib/env';
 
 interface Props {
   value: boolean;
 }
 
-const { value } = Astro.props;
+let { 
+  value
+} = Astro.props;
+
+if (Env.is("PUBLIC_ENVIRONMENT", "development")) {
+  value = false;
+}
 
 ---
 

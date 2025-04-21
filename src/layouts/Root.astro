@@ -1,0 +1,122 @@
+---
+
+import { Metadata } from "@lib/metadata"
+import { Locale }   from '@lib/locale';
+import { Env }      from '@lib/env';
+
+import Head        from '@document/Head.astro';
+import Title       from "@document/meta/Title.astro"
+import Description from "@document/meta/Description.astro"
+import Keywords    from "@document/meta/Keywords.astro"
+import Index       from "@document/meta/Index.astro"
+import Follow      from "@document/meta/Follow.astro"
+import Canonical   from "@document/meta/Canonical.astro"
+import OpenGraph   from "@document/social/OpenGraph.astro"
+import Twitter     from "@document/social/Twitter.astro"
+import Favicon     from "@document/icons/Favicon.astro"
+
+interface Props {
+  page?     : string; 
+  metadata? : {
+    title?       : string;
+    description? : string;
+    keywords?    : string[];
+    image?       : {
+      image?: string;
+    };
+    type?        : string;
+    index?       : boolean;
+    follow?      : boolean;
+  }; 
+}
+
+const {
+  page,
+  metadata,
+} = Astro.props as Props;
+
+// Directus data:
+const data = {
+  general: {
+    metadata : {
+      title       : '',
+      description : '',
+      keywords    : [],
+      image       : '',
+    },
+  },
+  page    : {
+    metadata : {
+      title       : '',
+      description : '',
+      keywords    : [],
+      image       : '',
+    },
+  },
+  customMetadata : {
+    title       : '',
+    description : '',
+    keywords    : [],
+    image       : '',
+  },
+}
+
+// Default metadata:
+Metadata.set({
+  title       : data.customMetadata?.title        || data.page?.metadata?.title        || data.general.metadata?.title,
+  description : data.customMetadata?.description  || data.page?.metadata?.description  || data.general.metadata?.description  || '',
+  keywords    : data.customMetadata?.keywords     || data.page?.metadata?.keywords     || data.general.metadata?.keywords     || [],
+  image       : data.customMetadata?.image        || data.page?.metadata?.image        || data.general.metadata?.image || undefined,
+});
+
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+
+---
+
+<!DOCTYPE html>
+<html lang={Locale.current}>
+  <Head>
+
+    <Title value={Metadata.title} />
+    <Description value={Metadata.description} />
+    <Keywords value={Metadata.keywords} />
+
+    <Index value={Metadata.index} />
+    <Follow value={Metadata.follow} />
+    <Canonical value={canonical} />
+
+    <OpenGraph
+      title={Metadata.title}
+      description={Metadata.description}
+      image={Metadata.image}
+      url={canonical}
+      type={Metadata.type}
+    />
+    
+    <Twitter
+      title={Metadata.title}
+      description={Metadata.description}
+      image={Metadata.image}
+    />
+
+    <Favicon 
+      icons={{
+        default: {
+          ico : { path: "/favicon/favicon.ico" },
+          png : [
+            { path: "/favicon/favicon-16.png", size: 16 },
+            { path: "/favicon/favicon-32.png", size: 32 },
+            { path: "/favicon/favicon-192.png", size: 192 },
+            { path: "/favicon/favicon-512.png", size: 512 }
+          ],
+          apple : { path: "/favicon/apple-touch-icon.png", size: 180 }
+        }
+      }}
+    />
+  </Head>
+
+  <body>
+    <slot />
+  </body>
+</html>
